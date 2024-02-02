@@ -5,8 +5,8 @@ import sys
 import json
 import logging
 import argparse
-from transmission_rpc import Client
-from tlever_category import mk_category, rm_category, downloads_path
+from tlever_auth import get_client, get_rpc_semver
+from tlever_category import mk_category, rm_category
 from tlever_label import mk_label, rm_label
 from tlever_tag import mk_tag, rm_tag
 
@@ -16,15 +16,7 @@ f = open(os.path.dirname(__file__) + "/../transmission-lever.json")
 
 cfg = json.load(f)
 
-client = Client(host=cfg["Client"]["host"],
-                port=int(cfg["Client"]["port"]),
-                username=cfg["Client"]["username"],
-                password=cfg["Client"]["password"])
-
-#id = "191d8c692bd1e58339093a96a2111d5370f065e8"
-#torrent = client.get_torrent(torrent_id=id)
-#print(torrent)
-#sys.exit()
+client = get_client(cfg)
 
 # create the top level parser
 parser = argparse.ArgumentParser(
