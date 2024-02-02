@@ -7,6 +7,15 @@ from tlever_client import get_client, get_torrents_list, start_torrent
 def upd_tier(num: str,
              config: dict,
              torrent_hash: str) -> None:
+
+    """
+    Change the label of a tier
+    :param num: the number of the tier
+    :param config: valid configuration dictionary
+    :param torrent_hash: hash of a single torrent
+    :return: None
+    """
+
     client = get_client(config)
     prefix_char = config['General']['prefix']['tiers']
     new_label = prefix_char + "tier-" + num
