@@ -1,3 +1,4 @@
 .env/
 .idea/
 transmission-lever.json
+src/__pycache__/
