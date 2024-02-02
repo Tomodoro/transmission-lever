@@ -9,6 +9,7 @@ from tlever_client import get_client, get_rpc_semver
 from tlever_category import mk_category, rm_category
 from tlever_label import mk_label, rm_label
 from tlever_tag import mk_tag, rm_tag
+from tlever_tier import set_tiers, unset_tiers
 
 logging.basicConfig(level=logging.INFO)
 
@@ -75,6 +76,15 @@ subparser_label.add_argument('hash',
                              type=str,
                              help='the hash of the torrent')
 
+# create the parser for the "tier" command
+subparser_label = subparsers.add_parser('tier',
+                                        help='manages upload limit based on ratio')
+
+subparser_label.add_argument('action',
+                             type=str,
+                             choices=['set', 'unset'],
+                             help='action to perform')
+
 # parse arguments
 args = parser.parse_args()
 
@@ -101,3 +111,9 @@ elif args.subparser_name == 'tag':
     elif args.action == 'remove':
         rm_tag(client, cfg, args.hash, args.name)
 
+elif args.subparser_name == 'tier':
+    if args.action == 'set':
+        set_tiers(cfg)
+
+    elif args.action == 'unset':
+        unset_tiers(cfg)
