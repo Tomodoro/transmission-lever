@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 
-import logging
+import os
 from transmission_rpc import Client
-from tlever_label import *
-from tlever_directory import *
+from tlever_label import mk_label, rm_label
 
 
 def category_prefix(config) -> str:
