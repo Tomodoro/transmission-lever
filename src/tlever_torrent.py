@@ -20,3 +20,24 @@ def mv_data(client: Client,
     logging.info(f"Moving data from {old_directory} to {directory} for torrent with hash {torrent_hash}")
     client.move_torrent_data(ids=[torrent_hash], location=directory)
     return None
+
+
+def change_upload_throttle(client,
+                           torrent_hash: str,
+                           limits: dict
+                           ) -> None:
+
+    """
+    Change upload throttle of a torrent
+    :param client: valid transmission session
+    :param torrent_hash: hash of a single torrent
+    :param limits: dictionary with upload limits
+    :return:
+    """
+
+    client.change_torrent(ids=[torrent_hash],
+                          seed_idle_limit=limits['seed_idle_limit'],
+                          seed_idle_mode=limits["seed_idle_mode"],
+                          seed_ratio_mode=limits["seed_ratio_mode"],
+                          upload_limit=limits["upload_limit"],
+                          upload_limited=limits["upload_limited"])
