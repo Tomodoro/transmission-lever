@@ -6,7 +6,6 @@ from transmission_rpc import Client, Torrent
 
 
 def get_client(config: dict) -> Client:
-
     """
     Get a transmission RPC client
     :param config: valid configuration dictionary
@@ -26,7 +25,6 @@ def get_client(config: dict) -> Client:
 
 
 def get_rpc_semver(client: Client) -> str:
-
     """
     Get RPC server version
     :param client: valid transmission session
@@ -37,7 +35,6 @@ def get_rpc_semver(client: Client) -> str:
 
 
 def get_transmission_version(client: Client) -> str:
-
     """
     Get transmission server version
     :param client: valid transmission session
@@ -48,7 +45,6 @@ def get_transmission_version(client: Client) -> str:
 
 
 def get_downloads_dir(client: Client) -> str:
-
     """
     Get global download directory of transmission
     :param client: valid transmission session
@@ -59,7 +55,6 @@ def get_downloads_dir(client: Client) -> str:
 
 
 def get_torrents_list(client: Client) -> list[Torrent]:
-
     """
     List all torrent in the current session
     :param client: valid transmission session
@@ -67,3 +62,16 @@ def get_torrents_list(client: Client) -> list[Torrent]:
     """
 
     return client.get_torrents()
+
+
+def start_torrent(client: Client,
+                  torrent_hash: str
+                  ) -> None:
+    """
+    Resume a paused torrent
+    :param torrent_hash:
+    :param client: valid transmission session
+    :return: None
+    """
+
+    client.start_torrent(ids=[torrent_hash])
