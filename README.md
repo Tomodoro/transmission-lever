@@ -83,6 +83,11 @@ Downloads/
 > Hooking the command `find /path/to/Downloads -type d -empty -delete` to a script
 > triggered by added|done|done_seeding of a torrent does the trick.
 
+If labels get desync from the torrent directory, you can enforce the category label directory:
+```bash
+python src/tlever.py enforce category
+```
+
 ### Tags
 
 To separate common labels from category labels,
@@ -112,21 +117,27 @@ this is based on [qbitseedmgr](https://github.com/Tomodoro/qbitseedmgr).
 
 To start managing torrents:
 ```bash
-python src/tier.py tier set
+python src/tlever.py tier set
 ```
 
 To stop managing torrents:
 ```bash
-python src/tier.py tier unset
+python src/tlever.py tier unset
 ```
 
 To resume paused torrents:
 ```bash
-python src/tier.py tier activate
+python src/tlever.py tier activate
 ```
 
 > It seems that the RPC does not expose the number of seeds,
 > so it's not possible to port `not-popular`.
+
+To keep the tiers updated and active:
+```bash
+python src/tlever.py enforce tier
+
+```
 
 ### Labels
 
@@ -158,6 +169,7 @@ The goal is to have a friendly wrapper with proper docstrings.
 
 * `tlever_category.py`: all actions related to a category.
 * `tlever_tag.py`: all actions related to a tag.
+* `tlever_tier.py`: all actions related to tiers
 
 ### Low-level
 
