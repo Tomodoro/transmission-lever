@@ -27,12 +27,11 @@ def find_label(client: Client,
     return False
 
 
-def swap_label(client: Client,
-               torrent_hash: str,
-               old_label_name: str,
-               new_label_name: str
-               ) -> bool:
-
+def sw_label(client: Client,
+             torrent_hash: str,
+             old_label_name: str,
+             new_label_name: str
+             ) -> bool:
     """
     Swap a label on a torrent object
     :param client: valid transmission session
@@ -95,7 +94,8 @@ def rm_label(client: Client,
     exists = find_label(client, torrent_hash, label_name)
 
     if not exists:
-        logging.info(f"Skipping label deletion in torrent with hash {torrent_hash}: label {label_name}  does not exists")
+        logging.info(
+            f"Skipping label deletion in torrent with hash {torrent_hash}: label {label_name}  does not exists")
         return False
 
     else:
