@@ -108,5 +108,6 @@ def rm_label(client: Client,
             else:
                 torrent_labels_new.append(label)
 
+        client.change_torrent(ids=[torrent_hash], labels=torrent_labels_new)
         logging.info(f"Removed label {label_name} in torrent with hash {torrent_hash}")
         return True
