@@ -3,14 +3,19 @@
 import os
 from transmission_rpc import Client
 from tlever_label import mk_label, rm_label
+from tlever_torrent import mv_data
+from tlever_auth import get_downloads_dir
 
 
 def category_prefix(config) -> str:
+
+    """
+    Returns the category prefix from configration file
+    :param config: valid configuration dictionary
+    :return: category prefix
+    """
+
     return config['General']['prefix']['categories']
-
-
-def downloads_path(client) -> str:
-    return client.get_session().download_dir
 
 
 def mk_category(client: Client,
@@ -31,8 +36,8 @@ def mk_category(client: Client,
     label = category_prefix(config) + category_name
     mk_label(client, torrent_hash, label)
 
-    directory = os.path.join(downloads_path(client), category_name)
-    client.move_torrent_data(ids=[torrent_hash], location=directory)
+    directory = os.path.join(get_downloads_dir(client), category_name)
+    mv_data(client, torrent_hash, directory)
 
     return
 
@@ -52,8 +57,8 @@ def rm_category(client: Client,
     :return: None
     """
 
-    directory = downloads_path(client)
-    client.move_torrent_data(ids=[torrent_hash], location=directory)
+    directory = get_downloads_dir(client)
+    mv_data(client, torrent_hash, directory)
 
     label = category_prefix(config) + category_name
     rm_label(client, torrent_hash, label)
