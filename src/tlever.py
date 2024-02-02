@@ -1,12 +1,9 @@
 #!/usr/bin/env python
 
-import re
-import os
-import sys
 import json
 from transmission_rpc import Client
 
-f = open('transmission-lever.json')
+f = open('../transmission-lever.json')
 
 cfg = json.load(f)
 
@@ -16,3 +13,8 @@ client = Client(host=cfg["Client"]["host"],
                 password=cfg["Client"]["password"])
 
 print(client.server_version)
+
+torrents = client.get_torrents()
+
+for torrent in torrents:
+    print(torrent)
