@@ -33,7 +33,12 @@ python -m venv .env
 pip3 install transmission-rpc
 ```
 
-6. Check help:
+6. Copy configuration file from example:
+```bash
+cp transmission-lever.json.example transmission-lever.json
+```
+
+7. Check help:
 ```bash
 python src/tlever.py --help
 ```
@@ -74,6 +79,9 @@ Downloads/
 > This command does not clean up empty directories,
 > this is because the program is using the RPC to move torrent data
 > and it does not have permissions over the filesystem in all use cases.
+> 
+> Hooking the command `find /path/to/Downloads -type d -empty -delete` to a script
+> triggered by added|done|done_seeding of a torrent does the trick.
 
 ### Tags
 
@@ -96,6 +104,29 @@ This will remove the label `#best-of-the-year` to the torrent.
 
 > This command *is not* equivalent to `tier.py label ...`
 > as it is *always* prefixed.
+
+### Tiers
+
+To set upload speed throttling based on ratio,
+this is based on [qbitseedmgr](https://github.com/Tomodoro/qbitseedmgr).
+
+To start managing torrents:
+```bash
+python src/tier.py tier set
+```
+
+To stop managing torrents:
+```bash
+python src/tier.py tier unset
+```
+
+To resume paused torrents:
+```bash
+python src/tier.py tier activate
+```
+
+> It seems that the RPC does not expose the number of seeds,
+> so it's not possible to port `not-popular`.
 
 ### Labels
 
