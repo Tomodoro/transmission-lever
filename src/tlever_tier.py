@@ -2,11 +2,13 @@
 
 from tlever_label import find_label, find_regex_label, sw_label, rm_label
 from tlever_client import get_client, get_torrents_list, start_torrent
+from tlever_torrent import change_upload_throttle
 
 
 def upd_tier(num: str,
              config: dict,
-             torrent_hash: str) -> None:
+             torrent_hash: str
+             ) -> None:
 
     """
     Change the label of a tier
@@ -22,11 +24,8 @@ def upd_tier(num: str,
     old_label = prefix_char + "tier-" + str(int(num) - 1)
 
     sw_label(client, torrent_hash, old_label, new_label)
-    client.change_torrent(ids=[torrent_hash],
-                          seed_idle_mode=config["Tiers"][num]["seed_idle_mode"],
-                          seed_ratio_mode=config["Tiers"][num]["seed_ratio_mode"],
-                          upload_limit=config["Tiers"][num]["upload_limit"],
-                          upload_limited=config["Tiers"][num]["upload_limited"])
+    limits = config['Tiers'][num]
+    change_upload_throttle(client, torrent_hash, limits)
 
 
 def set_tiers(config: dict) -> None:
@@ -50,10 +49,8 @@ def set_tiers(config: dict) -> None:
 
         # Maintain Tier free
         elif free:
-            client.change_torrent(ids=[torrent_hash],
-                                  upload_limited=False,
-                                  seed_ratio_mode=2,
-                                  seed_idle_mode=2)
+            limits = config['Tiers']["free"]
+            change_upload_throttle(client, torrent_hash, limits)
 
         # Set Tier 0
         elif ((ratio >= 0)
@@ -96,6 +93,8 @@ def unset_tiers(config: dict) -> None:
 
             if exists:
                 rm_label(client, torrent_hash, tier_label)
+                limits = config['Tiers']["free"]
+                change_upload_throttle(client, torrent_hash, limits)
                 break
 
 
