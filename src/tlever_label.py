@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import re
 import logging
 from transmission_rpc import Client
 
@@ -27,6 +28,29 @@ def find_label(client: Client,
     return False
 
 
+def find_regex_label(client: Client,
+                     torrent_hash: str,
+                     label_regex: str
+                     ) -> bool:
+
+    """
+    Find a label on a torrent object using regex
+    :param client: valid transmission session
+    :param torrent_hash: hash of a single torrent
+    :param label_regex: name of the label regex
+    :return: True if one or more matches are found, False otherwise
+    """
+
+    torrent_labels = client.get_torrent(torrent_hash).labels
+    labels_flattened_list = ','.join(torrent_labels)
+
+    exists = re.search(label_regex, labels_flattened_list)
+
+    if not exists:
+        return False
+    return True
+
+
 def sw_label(client: Client,
              torrent_hash: str,
              old_label_name: str,
@@ -38,19 +62,22 @@ def sw_label(client: Client,
     :param torrent_hash: hash of a single torrent
     :param old_label_name: name of the label to remove
     :param new_label_name: name of the label to add
-    :return: True on success, False if old label does not exist
+    :return: True on swap, False if old label does not exist
     """
 
     exists = find_label(client, torrent_hash, old_label_name)
 
     if not exists:
-        logging.info(f"Skipping label swap in torrent with hash {torrent_hash}: label {old_label_name} does not exist")
+        logging.info(
+            f"Skipping label deletion in torrent with hash {torrent_hash}: label {old_label_name} does not exist")
+        mk_label(client, torrent_hash, new_label_name)
         return False
 
-    rm_label(client, torrent_hash, old_label_name)
-    mk_label(client, torrent_hash, new_label_name)
-    logging.info(f"Swapped label {old_label_name} with new label {new_label_name} in torrent with hash {torrent_hash}")
-    return True
+    else:
+        rm_label(client, torrent_hash, old_label_name)
+        mk_label(client, torrent_hash, new_label_name)
+        logging.info(f"Swapped label {old_label_name} with new label {new_label_name} in torrent with hash {torrent_hash}")
+        return True
 
 
 def mk_label(client: Client,
