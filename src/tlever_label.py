@@ -42,7 +42,7 @@ def swap_label(client: Client,
     :return: True on success, False if old label does not exist
     """
 
-    exists = find_label(client, torrent_hash)
+    exists = find_label(client, torrent_hash, old_label_name)
 
     if not exists:
         logging.info(f"Skipping label swap in torrent with hash {torrent_hash}: label {old_label_name} does not exist")
