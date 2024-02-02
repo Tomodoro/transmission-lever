@@ -9,7 +9,7 @@ from tlever_client import get_client, get_rpc_semver
 from tlever_category import mk_category, rm_category
 from tlever_label import mk_label, rm_label
 from tlever_tag import mk_tag, rm_tag
-from tlever_tier import set_tiers, unset_tiers
+from tlever_tier import set_tiers, unset_tiers, activate_tiers
 
 logging.basicConfig(level=logging.INFO)
 
@@ -82,7 +82,7 @@ subparser_label = subparsers.add_parser('tier',
 
 subparser_label.add_argument('action',
                              type=str,
-                             choices=['set', 'unset'],
+                             choices=['set', 'unset', 'activate'],
                              help='action to perform')
 
 # parse arguments
@@ -117,3 +117,6 @@ elif args.subparser_name == 'tier':
 
     elif args.action == 'unset':
         unset_tiers(cfg)
+
+    elif args.action == 'activate':
+        activate_tiers(cfg)
