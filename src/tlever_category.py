@@ -10,8 +10,8 @@ def category_prefix() -> str:
     return "@"
 
 
-def downloads_path() -> str:
-    return "/var/lib/transmission/Downloads"
+def downloads_path(client) -> str:
+    return client.get_session().download_dir
 
 
 def mk_category(client: Client,
@@ -27,13 +27,11 @@ def mk_category(client: Client,
     :return: None
     """
 
-    directory = os.path.join(downloads_path(), category_name)
-    mk_directory(directory)
-
     label = category_prefix() + category_name
     mk_label(client, torrent_hash, label)
 
-    client.change_torrent(ids=[torrent_hash], location=directory)
+    directory = os.path.join(downloads_path(client), category_name)
+    client.move_torrent_data(ids=[torrent_hash], location=directory)
 
     return
 
@@ -51,10 +49,8 @@ def rm_category(client: Client,
     :return: None
     """
 
-    client.change_torrent(ids=[torrent_hash], location=downloads_path())
-
-    directory = os.path.join(downloads_path(), category_name)
-    rm_directory(directory)
+    directory = downloads_path(client)
+    client.move_torrent_data(ids=[torrent_hash], location=directory)
 
     label = category_prefix() + category_name
     rm_label(client, torrent_hash, label)
