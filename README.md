@@ -6,7 +6,7 @@ for others to write their own automatized tools.
 
 ## Installation
 
-This python is written in python.
+This program is written in python and is platform agnostic.
 
 1. Clone the repo:
 ```bash
@@ -158,6 +158,8 @@ python src/tlever.py label add custom-label <torrent-hash>
 
 ## Module Usage
 
+### Overview
+
 The files are split into high-level functions and low functions.
 
 * Low-level functions interact directly with the RPC or the shell.
@@ -165,15 +167,23 @@ The files are split into high-level functions and low functions.
 
 The goal is to have a friendly wrapper with proper docstrings.
 
-### High-level
+#### High-level
 
 * `tlever_category.py`: all actions related to a category.
 * `tlever_tag.py`: all actions related to a tag.
-* `tlever_tier.py`: all actions related to tiers
+* `tlever_tier.py`: all actions related to tiers.
 
-### Low-level
+#### Low-level
 
-* `tlever_auth`: all RPC related to the current session.
+* `tlever_client`: all RPC related to the current session.
 * `tlever_label.py`: all RPC related to the labels.
 * `tlever_torrent.py`: all RPC related to the torrents.
 * `tlever_directory.py`: all shell calls related to the filesystem.
+
+### How to use?
+
+The main file `tlever.py` that handles the CLI
+it's only a series of if/else statements around functions.
+
+To build a custom program you only need to call this functions
+inside your program, making the respective module imports.
