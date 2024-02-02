@@ -45,7 +45,7 @@ def swap_label(client: Client,
     exists = find_label(client, torrent_hash)
 
     if not exists:
-        logging.info(f"Skipping swap in torrent with hash {torrent_hash}: label {old_label_name} does not exist")
+        logging.info(f"Skipping label swap in torrent with hash {torrent_hash}: label {old_label_name} does not exist")
         return False
 
     rm_label(client, torrent_hash, old_label_name)
@@ -76,7 +76,7 @@ def mk_label(client: Client,
         return True
 
     else:
-        logging.info(f"Skipping label {label_name} creation in torrent with hash {torrent_hash}")
+        logging.info(f"Skipping label creation in torrent with hash {torrent_hash}: label {label_name} already exists")
         return False
 
 
@@ -95,7 +95,7 @@ def rm_label(client: Client,
     exists = find_label(client, torrent_hash, label_name)
 
     if not exists:
-        logging.info(f"Skipping label {label_name} deletion in torrent with hash {torrent_hash}")
+        logging.info(f"Skipping label deletion in torrent with hash {torrent_hash}: label {label_name}  does not exists")
         return False
 
     else:
