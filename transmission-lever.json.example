@@ -1,0 +1,10 @@
+{
+
+    "Client": {
+                "host": "127.0.0.1",
+                "port": 9091,
+                "credentials": true,
+                "username": "admin",
+                "password": "adminadmin"
+    }
+}
