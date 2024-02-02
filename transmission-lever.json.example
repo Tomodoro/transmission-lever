@@ -6,5 +6,11 @@
                 "credentials": true,
                 "username": "admin",
                 "password": "adminadmin"
+    },
+    "General": {
+                "prefix": {
+                            "categories": "@",
+                            "tiers": "%",
+                            "tags": "#"
+                }
     }
-}
