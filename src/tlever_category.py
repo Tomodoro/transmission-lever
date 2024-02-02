@@ -33,6 +33,8 @@ def mk_category(client: Client,
     label = category_prefix() + category_name
     mk_label(client, torrent_hash, label)
 
+    client.change_torrent(ids=[torrent_hash], location=directory)
+
     return
 
 
