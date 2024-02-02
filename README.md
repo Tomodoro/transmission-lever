@@ -90,7 +90,7 @@ a tag with a prefix is used.
 
 For example, to tag `<torrent-hash>` with *best-of-the-year*:
 ```bash
-python src/tlever.py tag 
+python src/tlever.py tag add best-of-the-year <torrent-hash>
 ```
 
 This will add the label `#best-of-the-year` to the torrent.
