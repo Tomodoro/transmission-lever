@@ -75,11 +75,13 @@ def unset_tiers(config: dict) -> None:
 
     client = get_client(config)
     prefix_char = config['General']['prefix']['tiers']
+    tiers_num = config['General']['tiers']['number']
+    upper_limit = tiers_num+1
 
     for torrent in get_torrents_list(client):
         torrent_hash = torrent.hashString
 
-        for i in range(0,10):
+        for i in range(0, upper_limit):
             tier_label = prefix_char + "tier-" + str(i)
             exists = find_regex_label(client, torrent_hash, tier_label)
 
