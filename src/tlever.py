@@ -92,7 +92,7 @@ subparser_label = subparsers.add_parser('enforce',
 
 subparser_label.add_argument('action',
                              type=str,
-                             choices=['category'],
+                             choices=['category', 'tier'],
                              help='modifier to enforce')
 
 # parse arguments
@@ -139,3 +139,7 @@ elif args.subparser_name == 'tier':
 elif args.subparser_name == 'enforce':
     if args.action == 'category':
         enforce_categories(cfg)
+
+    elif args.action == 'tier':
+        set_tiers(cfg)
+        activate_tiers(cfg)
