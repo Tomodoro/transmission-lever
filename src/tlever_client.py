@@ -2,7 +2,7 @@
 
 import sys
 import logging
-from transmission_rpc import Client
+from transmission_rpc import Client, Torrent
 
 
 def get_client(config: dict) -> Client:
@@ -56,3 +56,14 @@ def get_downloads_dir(client: Client) -> str:
     """
 
     return client.get_session().download_dir
+
+
+def get_torrents_list(client: Client) -> list[Torrent]:
+
+    """
+    List all torrent in the current session
+    :param client: valid transmission session
+    :return: list of torrent objects
+    """
+
+    return client.get_torrents()
