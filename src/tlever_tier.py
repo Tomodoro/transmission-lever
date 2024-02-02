@@ -1,7 +1,7 @@
 # /usr/bin/env python
 
 from tlever_label import find_label, find_regex_label, sw_label, rm_label
-from tlever_client import get_client, get_torrents_list
+from tlever_client import get_client, get_torrents_list, start_torrent
 
 
 def upd_tier(num: str,
@@ -87,4 +87,29 @@ def unset_tiers(config: dict) -> None:
 
             if exists:
                 rm_label(client, torrent_hash, tier_label)
+                break
+
+
+def activate_tiers(config: dict) -> None:
+
+    """
+    Resume paused torrent managed by the tier tags
+    :param config: valid configuration dictionary
+    :return: None
+    """
+
+    client = get_client(config)
+    prefix_char = config['General']['prefix']['tiers']
+    tiers_num = config['General']['tiers']['number']
+    upper_limit = tiers_num+1
+
+    for torrent in get_torrents_list(client):
+        torrent_hash = torrent.hashString
+
+        for i in range(0, upper_limit):
+            tier_label = prefix_char + "tier-" + str(i)
+            exists = find_regex_label(client, torrent_hash, tier_label)
+
+            if exists:
+                start_torrent(client, torrent_hash)
                 break
