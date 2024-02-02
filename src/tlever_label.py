@@ -27,6 +27,33 @@ def find_label(client: Client,
     return False
 
 
+def swap_label(client: Client,
+               torrent_hash: str,
+               old_label_name: str,
+               new_label_name: str
+               ) -> bool:
+
+    """
+    Swap a label on a torrent object
+    :param client: valid transmission session
+    :param torrent_hash: hash of a single torrent
+    :param old_label_name: name of the label to remove
+    :param new_label_name: name of the label to add
+    :return: True on success, False if old label does not exist
+    """
+
+    exists = find_label(client, torrent_hash)
+
+    if not exists:
+        logging.info(f"Skipping swap in torrent with hash {torrent_hash}: label {old_label_name} does not exist")
+        return False
+
+    rm_label(client, torrent_hash, old_label_name)
+    mk_label(client, torrent_hash, new_label_name)
+    logging.info(f"Swapped label {old_label_name} with new label {new_label_name} in torrent with hash {torrent_hash}")
+    return True
+
+
 def mk_label(client: Client,
              torrent_hash: str,
              label_name: str
