@@ -23,7 +23,8 @@ parser = argparse.ArgumentParser(
     epilog='not all RPC methods are properly documented on upstream')
 
 parser.add_argument('-v', '--verbose',
-                    action='store_true')
+                    action='store_true',
+                    help='show verbose output')
 
 subparsers = parser.add_subparsers(help='modifier on a torrent',
                                    dest='subparser_name',
