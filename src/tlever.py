@@ -90,10 +90,10 @@ print(vars(args))
 
 if args.subparser_name == 'category':
     if args.action == 'add':
-        mk_category(client, args.hash, args.name)
+        mk_category(client, cfg, args.hash, args.name)
 
     elif args.action == 'remove':
-        rm_category(client, args.hash, args.name)
+        rm_category(client, cfg, args.hash, args.name)
 
 elif args.subparser_name == 'label':
     if args.action == 'add':
@@ -104,8 +104,8 @@ elif args.subparser_name == 'label':
 
 elif args.subparser_name == 'tag':
     if args.action == 'add':
-        mk_tag(client, args.hash, args.name)
+        mk_tag(client, cfg, args.hash, args.name)
 
     elif args.action == 'remove':
-        rm_tag(client, args.hash, args.name)
+        rm_tag(client, cfg, args.hash, args.name)
 

@@ -6,8 +6,8 @@ from tlever_label import *
 from tlever_directory import *
 
 
-def category_prefix() -> str:
-    return "@"
+def category_prefix(config) -> str:
+    return config['General']['prefix']['categories']
 
 
 def downloads_path(client) -> str:
@@ -15,6 +15,7 @@ def downloads_path(client) -> str:
 
 
 def mk_category(client: Client,
+                config: dict,
                 torrent_hash: str,
                 category_name: str
                 ) -> None:
@@ -22,12 +23,13 @@ def mk_category(client: Client,
     """
     Create an emulated category through labels
     :param client: valid transmission session
+    :param config: valid configuration dictionary
     :param torrent_hash: hash of a single torrent
     :param category_name: name of the category
     :return: None
     """
 
-    label = category_prefix() + category_name
+    label = category_prefix(config) + category_name
     mk_label(client, torrent_hash, label)
 
     directory = os.path.join(downloads_path(client), category_name)
@@ -37,6 +39,7 @@ def mk_category(client: Client,
 
 
 def rm_category(client: Client,
+                config: dict,
                 torrent_hash: str,
                 category_name: str
                 ) -> None:
@@ -44,6 +47,7 @@ def rm_category(client: Client,
     """
     Delete an emulated category through labels
     :param client: valid transmission session
+    :param config: valid configuration dictionary
     :param torrent_hash: hash of a single torrent
     :param category_name: name of the category
     :return: None
@@ -52,7 +56,7 @@ def rm_category(client: Client,
     directory = downloads_path(client)
     client.move_torrent_data(ids=[torrent_hash], location=directory)
 
-    label = category_prefix() + category_name
+    label = category_prefix(config) + category_name
     rm_label(client, torrent_hash, label)
 
     return
