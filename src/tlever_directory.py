@@ -55,7 +55,7 @@ def mk_directory(directory: str) -> bool:
         logging.info(f"Created directory {directory}")
         return True
 
-    logging.info(f"Skipping directory {directory} creation: already exists")
+    logging.info(f"Skipping directory creation: directory {directory} already exists")
     return False
 
 
@@ -70,13 +70,13 @@ def rm_directory(directory: str) -> bool:
     exists = find_directory(directory)
 
     if not exists:
-        logging.info(f"Skipping directory {directory} deletion: does not exist")
+        logging.info(f"Skipping directory deletion: directory {directory} does not exist")
         return False
 
     empty = empty_directory(directory)
 
     if not empty:
-        logging.info(f"Skipping directory {directory} deletion: non-empty directory")
+        logging.info(f"Skipping directory deletion: directory {directory} is not empty")
         return False
 
     os.rmdir(directory)
