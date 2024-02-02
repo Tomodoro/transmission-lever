@@ -6,7 +6,7 @@ import json
 import logging
 import argparse
 from tlever_client import get_client, get_rpc_semver
-from tlever_category import mk_category, rm_category
+from tlever_category import mk_category, rm_category, enforce_categories
 from tlever_label import mk_label, rm_label
 from tlever_tag import mk_tag, rm_tag
 from tlever_tier import set_tiers, unset_tiers, activate_tiers
@@ -61,7 +61,7 @@ subparser_label.add_argument('hash',
                              type=str,
                              help='the hash of the torrent')
 
-# create the parser for the "label" command
+# create the parser for the "tag" command
 subparser_label = subparsers.add_parser('tag',
                                         help='manages tags of torrents')
 
@@ -85,6 +85,15 @@ subparser_label.add_argument('action',
                              type=str,
                              choices=['set', 'unset', 'activate'],
                              help='action to perform')
+
+# create the parser for the "enforce" command
+subparser_label = subparsers.add_parser('enforce',
+                                        help='enforces a modifier on a torrent')
+
+subparser_label.add_argument('action',
+                             type=str,
+                             choices=['category'],
+                             help='modifier to enforce')
 
 # parse arguments
 args = parser.parse_args()
@@ -126,3 +135,7 @@ elif args.subparser_name == 'tier':
 
     elif args.action == 'activate':
         activate_tiers(cfg)
+
+elif args.subparser_name == 'enforce':
+    if args.action == 'category':
+        enforce_categories(cfg)

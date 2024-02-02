@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 
 import logging
-from transmission_rpc import Client
+from transmission_rpc import Client, Torrent
+from tlever_client import get_downloads_dir
+from tlever_directory import relative_directory
 
 
 def mv_data(client: Client,
@@ -20,6 +22,33 @@ def mv_data(client: Client,
     logging.info(f"Moving data from {old_directory} to {directory} for torrent with hash {torrent_hash}")
     client.move_torrent_data(ids=[torrent_hash], location=directory)
     return None
+
+
+def get_torrent_abs_download_dir(torrent: Torrent) -> str:
+
+    """
+    Get the absolute path directory of torrent
+    :param torrent: torrent object
+    :return: absolute path of a torrent
+    """
+
+    return torrent.download_dir
+
+
+def get_torrent_rel_download_dir(client: Client,
+                                 torrent: Torrent) -> str:
+
+    """
+    Get the relative path directory of torrent
+    :param client: valid transmission session
+    :param torrent: torrent object
+    :return: relative path of a torrent
+    """
+
+    full_path = get_torrent_abs_download_dir(torrent)
+    base_path = get_downloads_dir(client)
+
+    return relative_directory(full_path, base_path)
 
 
 def change_upload_throttle(client,

@@ -40,6 +40,23 @@ def empty_directory(directory: str) -> bool:
     return False
 
 
+def relative_directory(full_path, base_path) -> str:
+
+    """
+    Get relative directory
+    :param full_path: the full path directory
+    :param base_path: the base path directory
+    :return: relative directory, if dot return empty string
+    """
+
+    rel_path = os.path.relpath(full_path, base_path)
+
+    if rel_path == '.':
+        return ''
+    else:
+        return str(rel_path)
+
+
 def mk_directory(directory: str) -> bool:
 
     """
