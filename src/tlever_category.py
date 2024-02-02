@@ -4,7 +4,7 @@ import os
 from transmission_rpc import Client
 from tlever_label import mk_label, rm_label
 from tlever_torrent import mv_data
-from tlever_auth import get_downloads_dir
+from tlever_client import get_downloads_dir
 
 
 def category_prefix(config) -> str:

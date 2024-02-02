@@ -5,7 +5,7 @@ import sys
 import json
 import logging
 import argparse
-from tlever_auth import get_client, get_rpc_semver
+from tlever_client import get_client, get_rpc_semver
 from tlever_category import mk_category, rm_category
 from tlever_label import mk_label, rm_label
 from tlever_tag import mk_tag, rm_tag
