@@ -36,11 +36,12 @@ def set_tiers(config: dict) -> None:
     """
 
     client = get_client(config)
+    prefix = config['General']['prefix']['tiers'] + "tier-"
 
     for torrent in get_torrents_list(client):
         ratio = torrent.ratio
         torrent_hash = torrent.hashString
-        free = find_label(client, torrent_hash, "tier free")
+        free = find_label(client, torrent_hash, prefix+"free")
         progress = torrent.progress
 
         # Check if torrent is complete
