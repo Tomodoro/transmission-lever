@@ -11,8 +11,6 @@ from tlever_label import mk_label, rm_label
 from tlever_tag import mk_tag, rm_tag
 from tlever_tier import set_tiers, unset_tiers, activate_tiers
 
-logging.basicConfig(level=logging.INFO)
-
 f = open(os.path.dirname(__file__) + "/../transmission-lever.json")
 
 cfg = json.load(f)
@@ -23,6 +21,9 @@ client = get_client(cfg)
 parser = argparse.ArgumentParser(
     description='simplifies common chores on torrents by wrapping the RPC',
     epilog='not all RPC methods are properly documented on upstream')
+
+parser.add_argument('-v', '--verbose',
+                    action='store_true')
 
 subparsers = parser.add_subparsers(help='modifier on a torrent',
                                    dest='subparser_name',
@@ -88,14 +89,19 @@ subparser_label.add_argument('action',
 # parse arguments
 args = parser.parse_args()
 
-print(vars(args))
+# debug on
+if args.verbose:
+    logging.basicConfig(level=logging.INFO)
+    print(vars(args))
+else:
+    logging.basicConfig(level=logging.WARNING)
 
 if args.subparser_name == 'category':
     if args.action == 'add':
-        mk_category(client, cfg, args.hash, args.name)
+        mk_category(cfg, args.hash, args.name)
 
     elif args.action == 'remove':
-        rm_category(client, cfg, args.hash, args.name)
+        rm_category(cfg, args.hash, args.name)
 
 elif args.subparser_name == 'label':
     if args.action == 'add':
