@@ -106,10 +106,10 @@ elif args.subparser_name == 'label':
 
 elif args.subparser_name == 'tag':
     if args.action == 'add':
-        mk_tag(client, cfg, args.hash, args.name)
+        mk_tag(cfg, args.hash, args.name)
 
     elif args.action == 'remove':
-        rm_tag(client, cfg, args.hash, args.name)
+        rm_tag(cfg, args.hash, args.name)
 
 elif args.subparser_name == 'tier':
     if args.action == 'set':
