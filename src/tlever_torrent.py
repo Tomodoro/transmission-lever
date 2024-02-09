@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
+import os
 import logging
 from transmission_rpc import Client, Torrent
 from tlever_client import get_downloads_dir
-from tlever_directory import relative_directory
 
 
 def mv_data(client: Client,
@@ -48,7 +48,12 @@ def get_torrent_rel_download_dir(client: Client,
     full_path = get_torrent_abs_download_dir(torrent)
     base_path = get_downloads_dir(client)
 
-    return relative_directory(full_path, base_path)
+    rel_path = os.path.relpath(full_path, base_path)
+
+    if rel_path == '.':
+        return ''
+    else:
+        return str(rel_path)
 
 
 def change_upload_throttle(client,
