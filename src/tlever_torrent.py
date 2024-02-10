@@ -8,7 +8,8 @@ from tlever_client import get_downloads_dir
 
 def mv_data(client: Client,
             torrent_hash: str,
-            directory: str) -> None:
+            directory: str
+            ) -> None:
 
     """
     Move data of a torrent
@@ -24,7 +25,36 @@ def mv_data(client: Client,
     return None
 
 
-def get_torrent_abs_download_dir(torrent: Torrent) -> str:
+def get_stub_info(client: Client,
+                  torrent_hash: str
+                  ) -> dict:
+
+    """
+    Get subset of info from a torrent
+    :param client: valid transmission session
+    :param torrent_hash: hash of a single torrent
+    :return: dictionary with stub info
+    """
+
+    torrent = client.get_torrent(torrent_id=torrent_hash)
+
+    output = {
+        'Name': torrent.name,
+        'Hash': torrent.hashString,
+        'Ratio': torrent.ratio,
+        'Ratio Limit': torrent.seed_ratio_limit,
+        'Progress': torrent.progress,
+        'Labels': torrent.labels,
+        'Up Limit Speed': torrent.upload_limit,
+        'Down Limit Speed': torrent.download_limit,
+        'Up Limit Speed On': torrent.upload_limited,
+        'Down Limit Speed On': torrent.download_limited
+    }
+
+    return output
+
+
+def get_abs_download_dir(torrent: Torrent) -> str:
 
     """
     Get the absolute path directory of torrent
@@ -35,8 +65,9 @@ def get_torrent_abs_download_dir(torrent: Torrent) -> str:
     return torrent.download_dir
 
 
-def get_torrent_rel_download_dir(client: Client,
-                                 torrent: Torrent) -> str:
+def get_rel_download_dir(client: Client,
+                         torrent: Torrent
+                         ) -> str:
 
     """
     Get the relative path directory of torrent
@@ -45,7 +76,7 @@ def get_torrent_rel_download_dir(client: Client,
     :return: relative path of a torrent
     """
 
-    full_path = get_torrent_abs_download_dir(torrent)
+    full_path = get_abs_download_dir(torrent)
     base_path = get_downloads_dir(client)
 
     rel_path = os.path.relpath(full_path, base_path)
@@ -73,5 +104,6 @@ def change_upload_throttle(client,
                           seed_idle_limit=limits['seed_idle_limit'],
                           seed_idle_mode=limits["seed_idle_mode"],
                           seed_ratio_mode=limits["seed_ratio_mode"],
+                          seed_ratio_limit=limits["seed_ratio_limit"],
                           upload_limit=limits["upload_limit"],
                           upload_limited=limits["upload_limited"])

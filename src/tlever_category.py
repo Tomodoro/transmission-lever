@@ -2,7 +2,7 @@
 
 import os
 from tlever_label import mk_label, rm_label, find_regex_label
-from tlever_torrent import mv_data, get_torrent_rel_download_dir
+from tlever_torrent import mv_data, get_rel_download_dir
 from tlever_client import get_downloads_dir, get_client, get_torrents_list
 
 
@@ -31,7 +31,7 @@ def enforce_categories(config: dict) -> None:
     for torrent in get_torrents_list(client):
 
         # We get the torrent relative download directory
-        rel_torrent_dir = get_torrent_rel_download_dir(client, torrent)
+        rel_torrent_dir = get_rel_download_dir(client, torrent)
         # We check that there is a category label
         label_exists = find_regex_label(client, torrent.hashString, "@")
 
