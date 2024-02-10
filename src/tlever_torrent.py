@@ -73,5 +73,6 @@ def change_upload_throttle(client,
                           seed_idle_limit=limits['seed_idle_limit'],
                           seed_idle_mode=limits["seed_idle_mode"],
                           seed_ratio_mode=limits["seed_ratio_mode"],
+                          seed_ratio_limit=limits["seed_ratio_limit"],
                           upload_limit=limits["upload_limit"],
                           upload_limited=limits["upload_limited"])
