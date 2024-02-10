@@ -97,7 +97,7 @@ def get_stub_info(client: Client,
     for label in torrent.labels:
 
         if label[0] == prefixes['tier']:  # found tier
-            tier = int(label[5:])
+            tier = int(label[6:])
 
         elif label[0] == prefixes['category']:  # found category
             category = label[1:]
