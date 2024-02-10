@@ -19,6 +19,7 @@ class TorrentStub:
                  ratio_limit_mode: int,
                  ratio_pretty: str,
                  progress: float,
+                 status: str,
                  group: str,
                  tier: int,
                  category: str,
@@ -40,6 +41,7 @@ class TorrentStub:
         self.ratio_limit_mode = ratio_limit_mode
         self.ratio_pretty = ratio_pretty
         self.progress = progress
+        self.status = status
         self.group = group
         self.tier = tier
         self.category = category
@@ -188,6 +190,7 @@ def get_stub_info(client: Client,
         ratio_limit_mode=torrent.seed_ratio_mode,
         ratio_pretty=ratio_pretty,
         progress=torrent.progress,
+        status=torrent.status,
         group=torrent.group,
         tier=tier,
         category=category,
