@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 
 import os
-import sys
 import json
 import logging
 import argparse
-from tlever_client import get_client, get_rpc_semver
+from tlever_client import get_client
 from tlever_category import mk_category, rm_category, enforce_categories
 from tlever_label import mk_label, rm_label
 from tlever_tag import mk_tag, rm_tag
 from tlever_tier import set_tiers, unset_tiers, activate_tiers
+from tlever_interface import curses_single
 
 f = open(os.path.dirname(__file__) + "/../transmission-lever.json")
 
@@ -96,6 +96,19 @@ subparser_label.add_argument('action',
                              choices=['category', 'tier'],
                              help='modifier to enforce')
 
+# create the parser for the "label" command
+subparser_label = subparsers.add_parser('tui',
+                                        help='starts ncurses interface')
+
+subparser_label.add_argument('action',
+                             type=str,
+                             choices=['show'],
+                             help='action to perform')
+
+subparser_label.add_argument('hash',
+                             type=str,
+                             help='the hash of the torrent')
+
 # parse arguments
 args = parser.parse_args()
 
@@ -144,3 +157,13 @@ elif args.subparser_name == 'enforce':
     elif args.action == 'tier':
         set_tiers(cfg)
         activate_tiers(cfg)
+
+elif args.subparser_name == 'tui':
+    if args.action == 'show':
+        if args.hash == 'all':
+            print('WIP')
+        elif args.hash == 'tier':
+            print('WIP')
+        else:
+            curses_single(cfg, args.hash)
+
