@@ -64,50 +64,50 @@ subparser_label.add_argument('hash',
 
 # create the parser for the "tag" command
 subparser_tag = subparsers.add_parser('tag',
-                                        help='manages tags of torrents')
+                                      help='manages tags of torrents')
 
 subparser_tag.add_argument('action',
-                             type=str,
-                             choices=['add', 'remove'],
-                             help='action to perform')
+                           type=str,
+                           choices=['add', 'remove'],
+                           help='action to perform')
 
 subparser_tag.add_argument('name',
-                             type=str,
-                             help='the name of the tag')
+                           type=str,
+                           help='the name of the tag')
 subparser_tag.add_argument('hash',
-                             type=str,
-                             help='the hash of the torrent')
+                           type=str,
+                           help='the hash of the torrent')
 
 # create the parser for the "tier" command
 subparser_tier = subparsers.add_parser('tier',
-                                        help='manages upload limit based on ratio')
+                                       help='manages upload limit based on ratio')
 
 subparser_tier.add_argument('action',
-                             type=str,
-                             choices=['set', 'unset', 'activate'],
-                             help='action to perform')
+                            type=str,
+                            choices=['set', 'unset', 'activate'],
+                            help='action to perform')
 
 # create the parser for the "enforce" command
 subparser_enforce = subparsers.add_parser('enforce',
-                                        help='enforces a modifier on a torrent')
+                                          help='enforces a modifier on a torrent')
 
 subparser_enforce.add_argument('action',
-                             type=str,
-                             choices=['category', 'tier'],
-                             help='modifier to enforce')
+                               type=str,
+                               choices=['category', 'tier'],
+                               help='modifier to enforce')
 
 # create the parser for the "tui" command
 subparser_tui = subparsers.add_parser('tui',
-                                        help='starts ncurses interface')
+                                      help='starts ncurses interface')
 
 subparser_tui.add_argument('action',
-                             type=str,
-                             choices=['show'],
-                             help='action to perform')
+                           type=str,
+                           choices=['show'],
+                           help='action to perform')
 
 subparser_tui.add_argument('hash',
-                             type=str,
-                             help='the hash of the torrent')
+                           type=str,
+                           help='the hash of the torrent')
 
 # parse arguments
 args = parser.parse_args()
@@ -166,4 +166,3 @@ elif args.subparser_name == 'tui':
             print('WIP')
         else:
             curses_single(cfg, args.hash)
-
