@@ -178,7 +178,6 @@ The goal is to have a friendly wrapper with proper docstrings.
 * `tlever_client`: all RPC related to the current session.
 * `tlever_label.py`: all RPC related to the labels.
 * `tlever_torrent.py`: all RPC related to the torrents.
-* `tlever_directory.py`: all shell calls related to the filesystem.
 
 ### How to use?
 
