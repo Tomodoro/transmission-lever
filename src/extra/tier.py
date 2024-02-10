@@ -58,9 +58,9 @@ def set_tiers(config: dict) -> None:
               and (ratio < config["Tiers"]["0"]["seed_ratio_limit"])):
             upd_tier("0", config, torrent_hash)
 
-        # Set Tier 1-9
+        # Set Tier 1 to max num
         else:
-            for i in range(1, 10):
+            for i in range(1, config['General']['tiers']['number']+1):
                 new_num = str(i)
                 old_num = str(i - 1)
                 if ((ratio >= config["Tiers"][old_num]["seed_ratio_limit"])
