@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 
-import logging
-from tlever_label import mk_label, rm_label
-from tlever_client import get_client
+from ..core.label import mk_label, rm_label
+from ..core.client import get_client
 
 
 def tag_prefix(config) -> str:

@@ -3,8 +3,8 @@
 import curses
 import traceback
 
-from tlever_client import get_client
-from tlever_torrent import get_stub_info
+from ..core.client import get_client
+from ..core.torrent import get_stub_info
 
 
 def prettify_stub_info(config,

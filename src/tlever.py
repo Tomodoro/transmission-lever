@@ -4,12 +4,12 @@ import os
 import json
 import logging
 import argparse
-from tlever_client import get_client
-from tlever_category import mk_category, rm_category, enforce_categories
-from tlever_label import mk_label, rm_label
-from tlever_tag import mk_tag, rm_tag
-from tlever_tier import set_tiers, unset_tiers, activate_tiers
-from tlever_interface import curses_single
+from core.client import get_client
+from core.label import mk_label, rm_label
+from extra.category import mk_category, rm_category, enforce_categories
+from extra.tag import mk_tag, rm_tag
+from extra.tier import set_tiers, unset_tiers, activate_tiers
+from extra.tui import curses_single
 
 f = open(os.path.dirname(__file__) + "/../transmission-lever.json")
 

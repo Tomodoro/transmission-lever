@@ -139,6 +139,15 @@ python src/tlever.py enforce tier
 
 ```
 
+### TUI
+
+Basic terminal interface to show live a torrent stats.
+
+For example, given the torrent `<torrent-hash>`:
+```bash
+python src/tlever.py tui show <torrent-hash>
+```
+
 ### Labels
 
 To manage labels without prefixes, useful to fix torrents that have
@@ -160,24 +169,16 @@ python src/tlever.py label add custom-label <torrent-hash>
 
 ### Overview
 
-The files are split into high-level functions and low functions.
+The functions are split into three namespaces:
 
-* Low-level functions interact directly with the RPC or the shell.
-* High-level functions do not interact directly with the RPC nor the shell.
+1. `core`: direct calls to RPC
+2. `extra`: extended functionality (i.e. categories)
+3. `community`: extended functionality added from user's PR
 
-The goal is to have a friendly wrapper with proper docstrings.
+The goal is to have a friendly wrapper with proper docstrings
+that is modular and extendable.
 
-#### High-level
-
-* `tlever_category.py`: all actions related to a category.
-* `tlever_tag.py`: all actions related to a tag.
-* `tlever_tier.py`: all actions related to tiers.
-
-#### Low-level
-
-* `tlever_client`: all RPC related to the current session.
-* `tlever_label.py`: all RPC related to the labels.
-* `tlever_torrent.py`: all RPC related to the torrents.
+If a PR usecase is generic enough it is moved into `extra`.
 
 ### How to use?
 
