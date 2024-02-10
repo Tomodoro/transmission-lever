@@ -120,5 +120,6 @@ def activate_tiers(config: dict) -> None:
             exists = find_regex_label(client, torrent_hash, tier_label)
 
             if exists:
-                start_torrent(client, torrent_hash)
-                break
+                if torrent.status == 'stopped':
+                    start_torrent(client, torrent_hash)
+                    break
