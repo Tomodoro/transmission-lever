@@ -2,7 +2,7 @@
 
 from core.label import find_label, find_regex_label, sw_label, rm_label
 from core.client import get_client, get_torrents_list, start_torrent
-from core.torrent import change_upload_throttle
+from core.torrent import set_upload_throttle
 
 
 def upd_tier(num: str,
@@ -25,7 +25,7 @@ def upd_tier(num: str,
 
     sw_label(client, torrent_hash, old_label, new_label)
     limits = config['Tiers'][num]
-    change_upload_throttle(client, torrent_hash, limits)
+    set_upload_throttle(client, torrent_hash, limits)
 
 
 def set_tiers(config: dict) -> None:
@@ -51,7 +51,7 @@ def set_tiers(config: dict) -> None:
         # Maintain Tier free
         elif free:
             limits = config['Tiers']["free"]
-            change_upload_throttle(client, torrent_hash, limits)
+            set_upload_throttle(client, torrent_hash, limits)
 
         # Set Tier 0
         elif ((ratio >= 0)
@@ -95,7 +95,7 @@ def unset_tiers(config: dict) -> None:
             if exists:
                 rm_label(client, torrent_hash, tier_label)
                 limits = config['Tiers']["free"]
-                change_upload_throttle(client, torrent_hash, limits)
+                set_upload_throttle(client, torrent_hash, limits)
                 break
 
 

@@ -242,10 +242,10 @@ def get_rel_download_dir(client: Client,
         return str(rel_path)
 
 
-def change_upload_throttle(client,
-                           torrent_hash: str,
-                           limits: dict
-                           ) -> None:
+def set_upload_throttle(client,
+                        torrent_hash: str,
+                        limits: dict
+                        ) -> None:
 
     """
     Change upload throttle of a torrent
