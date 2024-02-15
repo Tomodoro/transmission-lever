@@ -73,7 +73,7 @@ def enforce_categories(config: dict) -> None:
         # We get the torrent relative download directory
         rel_torrent_dir = get_rel_download_dir(client, torrent)
         # We check that there is a category label
-        label_exists = find_regex_label(client, torrent.hashString, "@")
+        label_exists = find_regex_label(client, torrent.hashString, category_prefix(config))
 
         # If the category label exists
         if label_exists:
