@@ -64,14 +64,3 @@ def get_torrents_list(client: Client) -> list[Torrent]:
     return client.get_torrents()
 
 
-def start_torrent(client: Client,
-                  torrent_hash: str
-                  ) -> None:
-    """
-    Resume a paused torrent
-    :param torrent_hash:
-    :param client: valid transmission session
-    :return: None
-    """
-
-    client.start_torrent(ids=[torrent_hash])

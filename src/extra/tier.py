@@ -1,8 +1,8 @@
 # /usr/bin/env python
 
 from core.label import find_label, find_regex_label, sw_label, rm_label
-from core.client import get_client, get_torrents_list, start_torrent
-from core.torrent import set_upload_throttle
+from core.client import get_client, get_torrents_list
+from core.torrent import set_upload_throttle, start_torrent
 
 
 def upd_tier(num: str,

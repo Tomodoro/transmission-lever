@@ -262,3 +262,16 @@ def set_upload_throttle(client,
                           seed_ratio_limit=limits["seed_ratio_limit"],
                           upload_limit=limits["upload_limit"],
                           upload_limited=limits["upload_limited"])
+
+
+def start_torrent(client: Client,
+                  torrent_hash: str
+                  ) -> None:
+    """
+    Resume a paused torrent
+    :param torrent_hash:
+    :param client: valid transmission session
+    :return: None
+    """
+
+    client.start_torrent(ids=[torrent_hash])
