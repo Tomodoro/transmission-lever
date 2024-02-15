@@ -18,6 +18,45 @@ def category_prefix(config) -> str:
     return config['General']['prefix']['categories']
 
 
+def category_exists(config: dict,
+                    target: str
+                    ) -> bool:
+    """
+    Checks if the category exists in the configuration
+    :param target: category to check
+    :param config: valid configuration dictionary
+    :return: True if category exists, False otherwise
+    """
+
+    category_list = config["General"]["categories"]
+
+    for category in category_list:
+        if category == target:
+            return True
+    return False
+
+
+def category_directory(config: dict,
+                       target: str
+                       ) -> str:
+    """
+    Returns the category directory from configration file
+    :param config: valid configuration dictionary
+    :param target: category to search directory
+    :return: Path of category if exists, root directory otherwise
+    """
+
+    client = get_client(config)
+    root_dir = get_downloads_dir(client)
+
+    category_list = config["General"]["categories"]
+
+    for category in category_list:
+        if category == target:
+            return os.path.join(root_dir, config["Categories"][category])
+    return root_dir
+
+
 def enforce_categories(config: dict) -> None:
 
     """
@@ -104,5 +143,21 @@ def rm_category(config: dict,
 
     label = category_prefix(config) + category_name
     rm_label(client, torrent_hash, label)
+
+    return
+
+
+def ls_category(config: dict) -> None:
+    """
+    List all emulated categories through labels
+    :param config: valid configuration dictionary
+    :return: list of category names
+    """
+
+    category_list = config["General"]["categories"]
+
+    for category in category_list:
+        category_path = config["Categories"][category]
+        print(f"{category}: {category_path}")
 
     return

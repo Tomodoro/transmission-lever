@@ -14,7 +14,25 @@
                 },
                 "tiers": {
                             "number": 9
-                }
+                },
+                "categories": [
+                  "music",
+                  "lindsey",
+                  "coldplay",
+                  "movies",
+                  "series",
+                  "kdrama",
+                  "anime"
+                ]
+    },
+    "Categories": {
+                    "music": "music",
+                    "lindsey": "music/lindsey",
+                    "coldplay": "music/coldplay",
+                    "movies": "movies",
+                    "series": "series",
+                    "kdrama": "series/korea",
+                    "anime": "animations/japan"
     },
     "Tiers": {
                 "free": {
