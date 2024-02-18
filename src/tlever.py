@@ -9,7 +9,7 @@ from core.label import mk_label, rm_label
 from extra.category import mk_category, rm_category, enforce_categories
 from extra.tag import mk_tag, rm_tag
 from extra.tier import set_tiers, unset_tiers, activate_tiers
-from extra.tui import curses_single
+from testing.tui import curses_single, curses_tier
 
 f = open(os.path.dirname(__file__) + "/../transmission-lever.json")
 
@@ -161,7 +161,7 @@ elif args.subparser_name == 'enforce':
 elif args.subparser_name == 'tui':
     if args.action == 'show':
         if args.hash == 'all':
-            print('WIP')
+            curses_tier(cfg)
         elif args.hash == 'tier':
             print('WIP')
         else:
