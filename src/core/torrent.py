@@ -162,7 +162,7 @@ def get_stub_info(client: Client,
             metric_limit = format_bytes(limit)
             metric_speed = format_bytes(speed)
 
-            return "{} {} [{} {}]".format(metric_speed[0],
+            return "{} {} - [{} {}]".format(metric_speed[0],
                                           metric_speed[1],
                                           metric_limit[0],
                                           metric_limit[1])
@@ -172,11 +172,11 @@ def get_stub_info(client: Client,
 
     up_pretty = pretty_metric(torrent.upload_limited,
                               torrent.rate_upload,
-                              torrent.upload_limit)
+                              torrent.upload_limit*1024)
 
     down_pretty = pretty_metric(torrent.download_limited,
                                 torrent.rate_download,
-                                torrent.download_limit)
+                                torrent.download_limit*1024)
 
     output = TorrentStub(
         name=torrent.name,
