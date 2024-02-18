@@ -8,7 +8,6 @@ from core.client import get_downloads_dir, get_client, get_torrents_list
 
 
 def category_prefix(config) -> str:
-
     """
     Returns the category prefix from configration file
     :param config: valid configuration dictionary
@@ -58,7 +57,6 @@ def category_directory(config: dict,
 
 
 def enforce_categories(config: dict) -> None:
-
     """
     Syncs torrent data dir with category label
     :param config: valid configuration dictionary
@@ -103,7 +101,6 @@ def mk_category(config: dict,
                 torrent_hash: str,
                 category_name: str
                 ) -> None:
-
     """
     Create an emulated category through labels
     :param config: valid configuration dictionary
@@ -127,7 +124,6 @@ def rm_category(config: dict,
                 torrent_hash: str,
                 category_name: str
                 ) -> None:
-
     """
     Delete an emulated category through labels
     :param config: valid configuration dictionary

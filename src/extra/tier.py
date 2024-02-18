@@ -9,7 +9,6 @@ def upd_tier(num: str,
              config: dict,
              torrent_hash: str
              ) -> None:
-
     """
     Change the label of a tier
     :param num: the number of the tier
@@ -73,7 +72,6 @@ def set_tiers(config: dict) -> None:
 
 
 def unset_tiers(config: dict) -> None:
-
     """
     Remove tier labels and reset upload limits
     :param config: valid configuration dictionary
@@ -100,7 +98,6 @@ def unset_tiers(config: dict) -> None:
 
 
 def activate_tiers(config: dict) -> None:
-
     """
     Resume paused torrent managed by the tier tags
     :param config: valid configuration dictionary

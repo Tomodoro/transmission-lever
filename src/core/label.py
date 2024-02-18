@@ -32,7 +32,6 @@ def find_regex_label(client: Client,
                      torrent_hash: str,
                      label_regex: str
                      ) -> bool:
-
     """
     Find a label on a torrent object using regex
     :param client: valid transmission session

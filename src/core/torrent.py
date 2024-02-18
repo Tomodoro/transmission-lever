@@ -6,7 +6,6 @@ from transmission_rpc import Client, Torrent
 
 
 class TorrentStub:
-
     """
     This class represents a subset of information about a torrent
     """
@@ -61,7 +60,6 @@ def mv_data(client: Client,
             torrent_hash: str,
             directory: str
             ) -> None:
-
     """
     Move data of a torrent
     :param client: valid transmission session
@@ -133,7 +131,6 @@ def get_stub_info(client: Client,
     ratio_pretty = "{} {}".format(torrent.ratio, pretty_ratio_limit)
 
     def format_bytes(size):
-
         """
         Format bytes size to use metric prefix
         :param size: bytes
@@ -153,7 +150,6 @@ def get_stub_info(client: Client,
                       speed: int,
                       limit: int
                       ) -> str:
-
         """
         Return prettified speed and limit with metric prefix
         :param is_limited: if the speed is limited
@@ -210,7 +206,6 @@ def get_stub_info(client: Client,
 
 
 def get_abs_download_dir(torrent: Torrent) -> str:
-
     """
     Get the absolute path directory of torrent
     :param torrent: torrent object
@@ -223,7 +218,6 @@ def get_abs_download_dir(torrent: Torrent) -> str:
 def get_rel_download_dir(client: Client,
                          torrent: Torrent
                          ) -> str:
-
     """
     Get the relative path directory of torrent
     :param client: valid transmission session
@@ -246,7 +240,6 @@ def set_upload_throttle(client,
                         torrent_hash: str,
                         limits: dict
                         ) -> None:
-
     """
     Change upload throttle of a torrent
     :param client: valid transmission session

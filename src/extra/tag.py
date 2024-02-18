@@ -12,7 +12,6 @@ def mk_tag(config: dict,
            torrent_hash: str,
            tag_name: str
            ) -> bool:
-
     """
     Add a tag on a torrent object
     :param config: valid configuration dictionary
@@ -31,7 +30,6 @@ def rm_tag(config: dict,
            torrent_hash: str,
            tag_name: str
            ) -> bool:
-
     """
     Remove a tag from a torrent object
     :param config: valid configuration dictionary
@@ -44,4 +42,3 @@ def rm_tag(config: dict,
 
     tag = tag_prefix(config) + tag_name
     return rm_label(client, torrent_hash, tag)
-
